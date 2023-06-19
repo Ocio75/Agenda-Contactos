@@ -1,81 +1,93 @@
 
-package jonocio.AgendaTel;
+package jonocio.Panles;
 
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 import java.awt.Color;
 import java.awt.Dialog;
-import java.sql.PreparedStatement;
+import java.awt.Font;
+import static java.nio.file.Files.delete;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jonocio.Utiles.MensaEmergentes;
-import jonocio.BBDD.*;
+import javax.swing.JTable;
+import javax.swing.table.JTableHeader;
+import jonocio.AgendaTel.FRM_informacion;
+import jonocio.AgendaTel.Principal;
+import static jonocio.AgendaTel.Principal.ShowJPanel;
+import jonocio.BBDD.Delete;
+import jonocio.BBDD.Insert;
 import jonocio.BBDD.Select;
 import jonocio.BBDD.Update;
-public class FRM_informacion extends javax.swing.JFrame {
-     Select select= new Select();
-    Update updat=new Update();
-    String id="";
-    public FRM_informacion(String _id) throws SQLException {
-        id=_id;
+import jonocio.Utiles.MensaEmergentes;
+
+public class Formulario extends javax.swing.JPanel {
+    Select select = new Select();
+    Update updat = new Update();
+    String id = "";
+
+    public Formulario(String _id) throws SQLException {
+        id = _id;
         initComponents();
-        llenarCa();
         initEstilos();
-        setTitle("Formulario Modificar Contacto");
-        LBLEncabezado.setText("Modificar Contacto");
+        LBLEncabezado.setText("MODIFICAR CONTACTO");
         BT_enviar.setText("Actualiar");
+        llenarCa();
+
 
     }
-     public FRM_informacion() throws SQLException{
-         initComponents();
-         setTitle("Formulario Añadir Contacto ");
-         LBLEncabezado.setText("Añadir Contacto");
-         BT_enviar.setText("Añadir");
-         initEstilos();
-     }
+    public Formulario() throws SQLException {
+        initComponents();
+        LBLEncabezado.setText("AÑADIR CONTACTO");
+        BT_enviar.setText("Añadir");
+        initEstilos();
 
-     private void initEstilos() throws SQLException{
-        this.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+    }
+    private void initEstilos() throws SQLException {
         FlatArcDarkIJTheme.setup();
         CB_genero.removeAllItems();
         CB_genero.addItem("Hombre");
         CB_genero.addItem("Mujer");
         CB_genero.addItem("Otro");
         select.llenarCombo(CB_tipocon);
-        LBLEncabezado.putClientProperty( "FlatLaf.style", "font: $h1.font" );
-        LBL_Nombre.putClientProperty( "FlatLaf.style", "font: $h4.font" );
-        LBL_apellidos.putClientProperty( "FlatLaf.style", "font: $h4.font" );
-        LBL_Correo.putClientProperty( "FlatLaf.style", "font: $h4.font" );
-        LBL_telefono.putClientProperty( "FlatLaf.style", "font: $h4.font" );
-        LBL_Fechanacimiento.putClientProperty("FlatLaf.style", "font: $h4.font");
-        LBL_genero.putClientProperty("FlatLaf.style", "font: $h4.font");
-        LBL_Notas.putClientProperty("FlatLaf.style", "font: $h4.font");
-        LBL_direccion.putClientProperty("FlatLaf.style", "font: $h4.font");
-        LBL_tipoConta.putClientProperty("FlatLaf.style", "font: $h4.font");
+        LBLEncabezado.putClientProperty("FlatLaf.style", "font: 150% $h1.font");
+        LBL_Nombre.putClientProperty("FlatLaf.style", "font: $h3.font");
+        LBL_apellidos.putClientProperty("FlatLaf.style", "font: $h3.font");
+        LBL_Correo.putClientProperty("FlatLaf.style", "font: $h3.font");
+        LBL_telefono.putClientProperty("FlatLaf.style", "font: $h3.font");
+        LBL_Fechanacimiento.putClientProperty("FlatLaf.style", "font: $h3.font");
+        LBL_genero.putClientProperty("FlatLaf.style", "font: $h3.font");
+        LBL_Notas.putClientProperty("FlatLaf.style", "font: $h3.font");
+        LBL_direccion.putClientProperty("FlatLaf.style", "font: $h3.font");
+        LBL_tipoConta.putClientProperty("FlatLaf.style", "font: $h3.font");
         Color nuevoColor = Color.RED; // Color deseado para el texto
         calendario.setForeground(nuevoColor);
-        
-    }
-    private void llenarCa() throws SQLException {
-        String[] _temp = select.extraerInf(id);
 
-        TXT_nombre.setText(_temp[1]);
-        TXT_apellido.setText(_temp[2]);
-        TXT_telefono.setText(_temp[3]);
-        TXT_Correo.setText(_temp[4]);
-        TXT_direccion.setText(_temp[5]);
-        CB_genero.setSelectedItem(_temp[6]);
-
-        try {
-            Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(_temp[7]);
-            calendario.setDate(fecha);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
+private void llenarCa() throws SQLException {
+    String[] _temp = select.extraerInf(id);
+
+    TXT_nombre.setText(_temp[1]);
+    TXT_apellido.setText(_temp[2]);
+    TXT_telefono.setText(_temp[3]);
+    TXT_Correo.setText(_temp[4]);
+    TXT_direccion.setText(_temp[5]);
+
+    // Convierte el valor a String antes de asignarlo a los JComboBox
+    CB_genero.setSelectedItem(String.valueOf(_temp[6]));
+    CB_tipocon.setSelectedItem(String.valueOf(_temp[9]));
+
+    try {
+        Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(_temp[7]);
+        calendario.setDate(fecha);
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+}
+
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -102,13 +114,8 @@ public class FRM_informacion extends javax.swing.JFrame {
         TXT_direccion = new javax.swing.JTextArea();
         calendario = new com.toedter.calendar.JDateChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setFocusable(false);
-        setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
-        setResizable(false);
-        setSize(new java.awt.Dimension(670, 420));
-        setType(java.awt.Window.Type.POPUP);
+        setMaximumSize(new java.awt.Dimension(1250, 705));
+        setMinimumSize(new java.awt.Dimension(1250, 705));
 
         bg.setBackground(new java.awt.Color(28, 64, 87));
         bg.setToolTipText("");
@@ -125,8 +132,8 @@ public class FRM_informacion extends javax.swing.JFrame {
                 CB_tipoconActionPerformed(evt);
             }
         });
-        bg.add(CB_tipocon, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 210, 32));
-        bg.add(LBLEncabezado, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 250, 56));
+        bg.add(CB_tipocon, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 390, 300, 40));
+        bg.add(LBLEncabezado, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 470, 70));
 
         TXT_nombre.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         TXT_nombre.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +141,7 @@ public class FRM_informacion extends javax.swing.JFrame {
                 TXT_nombreActionPerformed(evt);
             }
         });
-        bg.add(TXT_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 175, 39));
+        bg.add(TXT_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 230, 50));
 
         TXT_apellido.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         TXT_apellido.addActionListener(new java.awt.event.ActionListener() {
@@ -142,14 +149,14 @@ public class FRM_informacion extends javax.swing.JFrame {
                 TXT_apellidoActionPerformed(evt);
             }
         });
-        bg.add(TXT_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 190, 39));
+        bg.add(TXT_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 250, 50));
 
         TXT_Correo.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        bg.add(TXT_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 175, 39));
+        bg.add(TXT_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 230, 50));
 
         TXT_notas.setColumns(20);
         TXT_notas.setRows(5);
-        bg.add(TXT_notas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 390, 130));
+        bg.add(TXT_notas, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, 470, 140));
 
         TXT_telefono.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         TXT_telefono.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +169,7 @@ public class FRM_informacion extends javax.swing.JFrame {
                 TXT_telefonoKeyTyped(evt);
             }
         });
-        bg.add(TXT_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 190, 39));
+        bg.add(TXT_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, 250, 50));
 
         BT_enviar.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         BT_enviar.addActionListener(new java.awt.event.ActionListener() {
@@ -170,7 +177,7 @@ public class FRM_informacion extends javax.swing.JFrame {
                 BT_enviarActionPerformed(evt);
             }
         });
-        bg.add(BT_enviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, 160, 60));
+        bg.add(BT_enviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 500, 230, 90));
 
         CB_genero.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         CB_genero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -179,76 +186,70 @@ public class FRM_informacion extends javax.swing.JFrame {
                 CB_generoActionPerformed(evt);
             }
         });
-        bg.add(CB_genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 190, 34));
+        bg.add(CB_genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 250, 40));
 
         LBL_genero.setBackground(new java.awt.Color(255, 255, 255));
         LBL_genero.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         LBL_genero.setText("Genero:");
-        bg.add(LBL_genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 90, 20));
+        bg.add(LBL_genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, 150, 30));
 
         LBL_tipoConta.setBackground(new java.awt.Color(255, 255, 255));
         LBL_tipoConta.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         LBL_tipoConta.setText("Etiqueta del contacto");
-        bg.add(LBL_tipoConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, 170, 20));
+        bg.add(LBL_tipoConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 360, 260, 30));
 
         LBL_apellidos.setBackground(new java.awt.Color(255, 255, 255));
         LBL_apellidos.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         LBL_apellidos.setText("Apellidos");
-        bg.add(LBL_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 115, 24));
+        bg.add(LBL_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, 180, 40));
 
         LBL_Nombre.setBackground(new java.awt.Color(255, 255, 255));
         LBL_Nombre.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         LBL_Nombre.setText("Nombre");
-        bg.add(LBL_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 115, 24));
+        bg.add(LBL_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 170, 40));
 
         LBL_Correo.setBackground(new java.awt.Color(255, 255, 255));
         LBL_Correo.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         LBL_Correo.setText("Correo electronico");
-        bg.add(LBL_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 115, 24));
+        bg.add(LBL_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 170, 40));
 
         LBL_Fechanacimiento.setBackground(new java.awt.Color(255, 255, 255));
         LBL_Fechanacimiento.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         LBL_Fechanacimiento.setText("Fecha de nacimiento");
-        bg.add(LBL_Fechanacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 150, 24));
+        bg.add(LBL_Fechanacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 210, 40));
 
         LBL_telefono.setBackground(new java.awt.Color(255, 255, 255));
         LBL_telefono.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         LBL_telefono.setText("Telefono");
-        bg.add(LBL_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 115, 24));
+        bg.add(LBL_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, 180, 40));
 
         LBL_direccion.setBackground(new java.awt.Color(255, 255, 255));
         LBL_direccion.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         LBL_direccion.setText("Direccion");
-        bg.add(LBL_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 115, 24));
+        bg.add(LBL_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 130, 210, 40));
 
         LBL_Notas.setBackground(new java.awt.Color(255, 255, 255));
         LBL_Notas.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         LBL_Notas.setText("Notas");
-        bg.add(LBL_Notas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 115, 24));
+        bg.add(LBL_Notas, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, 140, 40));
 
         TXT_direccion.setColumns(20);
         TXT_direccion.setRows(5);
-        bg.add(TXT_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, -1, 110));
+        bg.add(TXT_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 170, 320, 160));
 
         calendario.setForeground(new java.awt.Color(255, 255, 255));
-        bg.add(calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 170, 30));
+        bg.add(calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 230, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1250, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE)
         );
-
-        bg.getAccessibleContext().setAccessibleName("");
-        bg.getAccessibleContext().setAccessibleDescription("");
-
-        pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void CB_tipoconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_tipoconActionPerformed
@@ -289,7 +290,7 @@ public class FRM_informacion extends javax.swing.JFrame {
             CB_tipocon.getSelectedItem().toString(),
             id
         };
-        if(id!=""){    
+        if(id!=""){
             if (updat.actualizarContacto(datos)) {
                 MensaEmergentes.alerta(1, "Contacto actualizado correctamente", "Menaje");
             } else {
@@ -298,7 +299,7 @@ public class FRM_informacion extends javax.swing.JFrame {
         }else{
             Insert insert =new Insert();
             try {
-              
+
                 if (insert.insertContacto(datos)) {
                     MensaEmergentes.alerta(1, "Contacto añadido correctamente", "Menaje");
                 } else {
@@ -308,14 +309,18 @@ public class FRM_informacion extends javax.swing.JFrame {
                 Logger.getLogger(FRM_informacion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+        try {
+            ShowJPanel(new Tabla());
+        } catch (SQLException ex) {
+            Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BT_enviarActionPerformed
-       
+
     private void CB_generoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_generoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CB_generoActionPerformed
 
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BT_enviar;
     private javax.swing.JComboBox<String> CB_genero;

@@ -125,5 +125,26 @@ public class Select extends Conexion {
         }
         return info;
     }
+    public int contatContactos() throws SQLException {
+        Conectar();
+        String query = "SELECT count(*) FROM contactos ";
+        int codigo = 1;
+
+        try {
+            PreparedStatement stmt = con.prepareStatement(query);
+            ResultSet resultado = stmt.executeQuery();
+
+            if (resultado.next()) {
+                codigo = resultado.getInt(1);
+            }
+
+            resultado.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Cerrar();
+        return codigo;
+    }
 
 }
