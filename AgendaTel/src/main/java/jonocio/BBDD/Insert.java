@@ -32,5 +32,20 @@ public class Insert extends Conexion {
             Cerrar();
         }
     }
+    public boolean insertarEtiqueta(String _nom) throws SQLException {
+        Conectar();
+        try {
+            String consulta = "INSERT INTO tipocontacto (nombre) VALUES (?)";
+            PreparedStatement stmt = con.prepareStatement(consulta);
+            stmt.setString(1, _nom); // nombre
+            stmt.execute();
+            return true;
+        } catch (SQLException ex) {
+            MensaEmergentes.alerta(2, "Error al cargar datos" + ex, "Error");
+            return false;
+        } finally {
+            Cerrar();
+        }
+    }
 
 }

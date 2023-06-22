@@ -27,6 +27,11 @@ public final class Principal extends javax.swing.JFrame {
         LBL_fecha.putClientProperty( "FlatLaf.style", "font:bold  $h1.font" );
         ShowJPanel(new Tabla());
         setFecha(LBL_fecha);
+        BT_nuevocon.setText("NUEVO CONTACTO");
+        BT_nuevocon.putClientProperty( "FlatLaf.style", "font:bold  $h2.font" );
+        BT_agenda.putClientProperty( "FlatLaf.style", "font:bold  $h2.font" );
+        BT_etiquetas.putClientProperty("FlatLaf.style", "font:bold  $h2.font");
+
 
               
     }
@@ -56,6 +61,7 @@ public final class Principal extends javax.swing.JFrame {
         LBL_fecha = new javax.swing.JLabel();
         BT_nuevocon = new javax.swing.JButton();
         BT_agenda = new javax.swing.JButton();
+        BT_etiquetas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Agenda de Contactos");
@@ -89,10 +95,17 @@ public final class Principal extends javax.swing.JFrame {
             }
         });
 
-        BT_agenda.setText("Agenda");
+        BT_agenda.setText("AGENDA");
         BT_agenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BT_agendaActionPerformed(evt);
+            }
+        });
+
+        BT_etiquetas.setText("ETIQUETAS");
+        BT_etiquetas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BT_etiquetasActionPerformed(evt);
             }
         });
 
@@ -104,19 +117,24 @@ public final class Principal extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(Menu_lateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(BT_agenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LBL_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BT_nuevocon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                    .addComponent(BT_nuevocon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                    .addComponent(BT_etiquetas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                    .addGroup(Menu_lateralLayout.createSequentialGroup()
+                        .addComponent(LBL_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         Menu_lateralLayout.setVerticalGroup(
             Menu_lateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Menu_lateralLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(21, 21, 21)
                 .addComponent(LBL_fecha)
-                .addGap(68, 68, 68)
-                .addComponent(BT_agenda, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(BT_nuevocon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104)
+                .addComponent(BT_agenda, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addComponent(BT_nuevocon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addComponent(BT_etiquetas, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -155,9 +173,14 @@ public final class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BT_nuevoconActionPerformed
 
+    private void BT_etiquetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_etiquetasActionPerformed
+        ShowJPanel(new Etiquetas());
+    }//GEN-LAST:event_BT_etiquetasActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BT_agenda;
+    private javax.swing.JButton BT_etiquetas;
     private javax.swing.JButton BT_nuevocon;
     private javax.swing.JLabel LBL_fecha;
     private javax.swing.JPanel Menu_lateral;

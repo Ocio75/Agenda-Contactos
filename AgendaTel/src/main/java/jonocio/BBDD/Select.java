@@ -12,8 +12,9 @@ import javax.swing.table.TableColumnModel;
 import jonocio.Utiles.MensaEmergentes;
 
 // Select select= new Select();
-public class Select extends Conexion {
-    String[] columnas = {"ID", "Nombre", "Apellidos", "Teléfono", "Correo", "Dirección", "Género", "Fecha de Nacimiento", "Notas", "Tipo de Contacto"};
+public class Select extends Conexion { 
+    String[] contactos = {"ID", "Nombre", "Apellidos", "Teléfono", "Correo", "Dirección", "Género", "Fecha de Nacimiento", "Notas", "Tipo de Contacto"};
+    String[] tipocontac = {"ID", "Nombre"};
 
     public void llenarTabla(JTable tabla,String aBuscar) {
          Conectar();
@@ -22,7 +23,7 @@ public class Select extends Conexion {
         try {
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
-            DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+            DefaultTableModel modelo = new DefaultTableModel(contactos, 0);
             modelo.setRowCount(0);
             while (resultSet.next()) {
                 Object[] fila = new Object[10];
@@ -145,6 +146,30 @@ public class Select extends Conexion {
         }
         Cerrar();
         return codigo;
+    }
+    public void llenarEtiquetas(JTable tabla) {
+        Conectar();
+        String query = "SELECT * FROM tipocontacto";
+        try {
+            Statement statement = con.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            DefaultTableModel modelo = new DefaultTableModel(tipocontac, 0);
+            modelo.setRowCount(0);
+            while (resultSet.next()) {
+                Object[] fila = new Object[2];
+                fila[0] = resultSet.getInt("id");
+                fila[1] = resultSet.getString("Nombre");
+                modelo.addRow(fila);
+            }
+            tabla.setModel(modelo);
+            statement.close();
+            resultSet.close();
+            Cerrar();
+            establecerAnchoCeroPrimeraColumna(tabla);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }
