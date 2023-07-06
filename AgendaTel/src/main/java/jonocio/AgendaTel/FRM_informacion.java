@@ -55,7 +55,9 @@ public class FRM_informacion extends javax.swing.JFrame {
         LBL_Notas.putClientProperty("FlatLaf.style", "font: $h4.font");
         LBL_direccion.putClientProperty("FlatLaf.style", "font: $h4.font");
         LBL_tipoConta.putClientProperty("FlatLaf.style", "font: $h4.font");
-               
+        Color nuevoColor = Color.RED; // Color deseado para el texto
+        calendario.setForeground(nuevoColor);
+        
     }
     private void llenarCa() throws SQLException {
         String[] _temp = select.extraerInf(id);

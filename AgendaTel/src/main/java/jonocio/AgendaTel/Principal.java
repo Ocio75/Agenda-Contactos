@@ -24,10 +24,10 @@ public final class Principal extends javax.swing.JFrame {
    
     
     private void initStyles() throws SQLException{
+        LBL_fecha.putClientProperty( "FlatLaf.style", "font:bold  $h1.font" );
         ShowJPanel(new Tabla());
         setFecha(LBL_fecha);
         BT_nuevocon.setText("NUEVO CONTACTO");
-        LBL_fecha.putClientProperty( "FlatLaf.style", "font:bold  $h1.font" );
         BT_nuevocon.putClientProperty( "FlatLaf.style", "font:bold  $h2.font" );
         BT_agenda.putClientProperty( "FlatLaf.style", "font:bold  $h2.font" );
         BT_etiquetas.putClientProperty("FlatLaf.style", "font:bold  $h2.font");
@@ -38,6 +38,7 @@ public final class Principal extends javax.swing.JFrame {
     public static void ShowJPanel(JPanel p) {
         p.setSize(1250, 705);
         p.setLocation(0,0);
+        
         cuerpo.removeAll();
         cuerpo.add(p, BorderLayout.CENTER);
         cuerpo.revalidate();

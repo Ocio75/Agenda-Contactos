@@ -27,13 +27,13 @@ public class Tabla extends javax.swing.JPanel {
     private void initStyles() throws SQLException{
         LBL_buscar.putClientProperty( "FlatLaf.style", "font:bold  $h2.font" );
         TXT_buscador.putClientProperty( "FlatLaf.style", "font:bold  $h3.font" );
-        LBL_total.putClientProperty("FlatLaf.style", "font:bold  $h3.font");
-        LBL_total.setText("Total : " + jTable1.getRowCount());
         aumentarTamañoFuenteTabla(jTable1,15);
         jTable1.setEnabled(false); // Desactiva la edición de celdas
         jTable1.setRowSorter(null); // Desactiva la ordenación de columnas
         jTable1.getTableHeader().setReorderingAllowed(false); // Desactiva la ordenación de columnas
         jTable1.getTableHeader().setResizingAllowed(false); // Desactiva la edición del tamaño de columnas
+        LBL_total.setText("Total : "+ jTable1.getRowCount());
+        LBL_total.putClientProperty( "FlatLaf.style", "font:bold  $h3.font" );
        
         
     }

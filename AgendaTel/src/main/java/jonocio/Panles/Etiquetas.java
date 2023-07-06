@@ -28,18 +28,18 @@ public class Etiquetas extends javax.swing.JPanel {
        
     private void initEstilos(){
         select.llenarEtiquetas(jTable1);
-        LBL_total.setText("Total : " + jTable1.getRowCount());
+
+        aumentarTamañoFuenteTabla(jTable1, 18);
         LBL_total.putClientProperty("FlatLaf.style", "font:bold  $h3.font");
         LBLEncabezado.putClientProperty("FlatLaf.style", "font: $h1.font");
+        LBL_total.setText("Total : " + jTable1.getRowCount());
         txt_campo.putClientProperty("FlatLaf.style", "font: $h3.font");
         bt_enviar.putClientProperty("FlatLaf.style", "font: $h3.font");
+        establecerAnchoCero(jTable1,0);
         jTable1.setEnabled(false); // Desactiva la edición de celdas
         jTable1.setRowSorter(null); // Desactiva la ordenación de columnas
         jTable1.getTableHeader().setReorderingAllowed(false); // Desactiva la ordenación de columnas
         jTable1.getTableHeader().setResizingAllowed(false); // Desactiva la edición del tamaño de columnas
-        establecerAnchoCero(jTable1, 0);
-        aumentarTamañoFuenteTabla(jTable1, 18);
-
         
     }
     private void establecerAnchoCero(JTable table, int columnIndex) {

@@ -6,7 +6,7 @@ public class Conexion {
    private final String ip = "127.0.0.1";
 	private final int port = 3306;
 	private final String BBDD = "BD_Agendatelefonica";
-	private final String user = "ConexionAgenda";
+	private final String user = "root";
 	private final String passwd = "";
 	private final String cadena = "jdbc:mysql://" + ip + ":" + port + "/" + BBDD;
 	private final String driver = "com.mysql.jdbc.Driver";
