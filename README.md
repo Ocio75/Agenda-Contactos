@@ -3,18 +3,18 @@ Agenda de contatos en java
 
 Funciones de la agenda:
 
--Añadir, modificar y eliminar ocntactos.
-
--clasificar contactos con etiquetas
-
--Crear y borrar las etiquetas
-
--Visualiazar contactos y etiquetas
-
--Buscar contactos mediante telefono o nombre
-
--Genera un pdf con los datos de la base de datos y te permite guardarlo en un a ubicaion 
-perosonalizada o en documentos (en una carpeta generada automatomatricamente)
+      -Añadir, modificar y eliminar ocntactos.
+      
+      -clasificar contactos con etiquetas
+      
+      -Crear y borrar las etiquetas
+      
+      -Visualiazar contactos y etiquetas
+      
+      -Buscar contactos mediante telefono o nombre
+      
+      -Genera un pdf con los datos de la base de datos y te permite guardarlo en un a ubicaion 
+      perosonalizada o en documentos (en una carpeta generada automatomatricamente)
 
 
 INSTRUCIONES DE USO
