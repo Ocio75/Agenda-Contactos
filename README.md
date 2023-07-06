@@ -8,6 +8,7 @@ Funciones de la agenda:
 -Crear y borrar las etiquetas
 -Visualiazar contactos y etiquetas
 -Buscar contactos mediante telefono o nombre
+-Genera un pdf con los datos de la base de datos y te permite guardarlo en un a ubicaion perosonalizada o en documentos (en una carpeta generada automatomatricamente)
 
 
 INSTRUCIONES DE USO
@@ -17,5 +18,4 @@ usaurio que usaremos para manejar la base de datos (para evitar usar root ). Par
 que el usario este creado en la base de datos vamos al apartado de privilegios y comporvamos que halla un usuario
 llamado "ConexionAgenda". En caso dee estar creado compilar y ejecutar el programa.
 
--En caso de error con la libreria Jcalendar
-    Solucion: en las dependencias elegimos la dependencia de jcalendar y la instalamso manualmente.
+
