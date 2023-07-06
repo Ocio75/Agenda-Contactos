@@ -8,7 +8,8 @@ Funciones de la agenda:
 -Crear y borrar las etiquetas
 -Visualiazar contactos y etiquetas
 -Buscar contactos mediante telefono o nombre
--Genera un pdf con los datos de la base de datos y te permite guardarlo en un a ubicaion perosonalizada o en documentos (en una carpeta generada automatomatricamente)
+-Genera un pdf con los datos de la base de datos y te permite guardarlo en un a ubicaion 
+perosonalizada o en documentos (en una carpeta generada automatomatricamente)
 
 
 INSTRUCIONES DE USO
